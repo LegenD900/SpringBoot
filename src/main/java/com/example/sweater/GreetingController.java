@@ -61,9 +61,9 @@ public class GreetingController {
         return "main";
     }
 
-    @PostMapping("del")
+    @PostMapping("/del{id]")
     public String del(@RequestParam String del, Map<String, Object> model) {
-        Iterable<Message> messages = messageRepo.deleteByTag(del);
+        Iterable<Message> messages = messageRepo.removeByTag(del);
 
         model.put("messages", messages);
 
