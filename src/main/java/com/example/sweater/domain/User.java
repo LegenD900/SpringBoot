@@ -4,22 +4,19 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "Usr")
+@Table(name = "usr")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) //автогенерирует id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String username;
+    private String password;
+    private boolean active;
 
-    private String UserName;
-
-    private String Pass;
-
-    private boolean Active;  // признак активности
-
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)  // EAGER жадная подгрузка
-    @CollectionTable(name = "User_role", joinColumns = @JoinColumn(name = "User_id"))
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;     // роль пользователя
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -29,28 +26,28 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return UserName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        UserName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPass() {
-        return Pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        Pass = pass;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public boolean isActive() {
-        return Active;
+        return active;
     }
 
     public void setActive(boolean active) {
-        Active = active;
+        this.active = active;
     }
 
     public Set<Role> getRoles() {
